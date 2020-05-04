@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ApplicationUserwithRole>
+
+@{
+    ViewData["Title"] = "UsersIndex";
+}
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+
+        @if (@ViewBag.PageName == "Developer")
+        {
+            <a class="navbar-brand" asp-area="" asp-controller="ApplicationUsers" asp-action="Index" asp-route-name="Developer">
+                <h1>
+                    <p>Administratörer / Utvecklare</p>
+                </h1>
+            </a>
+        }
+        else
+        {
+            <a class="navbar-brand" asp-area="" asp-controller="ApplicationUsers" asp-action="Index" asp-route-name="Customer">
+                <h1>
+                    <p>Kundrepresentant</p>
+                </h1>
+            </a>
+
+        }
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                @*<partial name="_LoginPartial" />*@
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Tickets" asp-action="Index">Ärende</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Companies" asp-action="Index">Kunder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Lösning</a>
+                    </li>
+                    @if (@ViewBag.PageName == "Developer")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="ApplicationUsers" asp-action="Index" asp-route-name="Customer">Kundrepresentant</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="ApplicationUsers" asp-action="Index" asp-route-name="Developer">Administratörer / Utvecklare</a>
+                        </li>
+                    }
+
+
+
+                </ul>
+            </div>
+        }
+    </div>
+</nav>
+
+
+@*<p>
+    <a asp-area="Identity" asp-page="/Account/Register">Register New @ViewData["PageName"]</a>
+</p>*@
+<table class="table table-striped table-hover">
+    <thead class="text-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser.CompanyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser.PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Company.CompanyAbbr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.PhoneNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ApplicationUser.Id" asp-route-name=@ViewData["PageName"]>Redigera</a> |
+                <a asp-action="Details" asp-route-id="@item.ApplicationUser.Id" asp-route-name=@ViewData["PageName"]>Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.ApplicationUser.Id" asp-route-name=@ViewData["PageName"]>Radera</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

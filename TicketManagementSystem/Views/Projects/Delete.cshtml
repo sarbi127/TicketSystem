@@ -1,0 +1,98 @@
+﻿@model TicketManagementSystem.Core.Models.Project
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+    <h1>Radera</h1>
+
+@if (@ViewBag.formhide == "Show")
+{
+<h3>Är du säker på att du vill ta bort det här?</h3>
+
+}
+else
+{
+    <p id="deletemsg"><b>Det här Lösning kan inte raderas. Det finns några anslutna ärende till detta Lösning.</b> </p>
+   
+}
+
+<div>
+    <h4>Lösning</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastUpdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastUpdate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SystemsUsed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SystemsUsed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Company.CompanyAbbr)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Company.CompanyAbbr)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Company.CompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Company.CompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Developer1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Developer1User.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Developer2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Developer2User.UserName)
+        </dd>
+    </dl>
+
+    @if (@ViewBag.formhide == "Show")
+    {
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Radera" class="btn btn-danger" /> |
+            <a asp-action="Index">Tillbaka till listan</a>
+        </form>
+
+    }
+    else
+    {
+<a asp-action="Index">Tillbaka till listan</a>
+    }
+
+
+</div>
+
+

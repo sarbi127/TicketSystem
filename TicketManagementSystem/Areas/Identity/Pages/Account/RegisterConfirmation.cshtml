@@ -1,0 +1,34 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Registrera bekräftelse";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+    <p>
+        Den här appen har för närvarande inte en riktig e-postsändare registrerad, se <a href="https://aka.ms/aspaccountconf">dessa dokument</a> för hur du konfigurerar en riktig e-postsändare.
+        Normalt skickas detta via e-post: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Klicka här för att bekräfta ditt konto</a>
+    </p>
+    }
+    else
+    {
+
+        <p>
+            <h6 style="color:forestgreen">
+                <br />Tack för att du registrerade användaren!
+                <br> Hon/han kommer att få ett e-post för att bekräfta sitt konto.
+                <br />
+            </h6>
+        </p>
+
+        <div>
+            <a asp-action="Index">Tillbaka till listan</a>
+        </div>
+
+
+       
+    }
+}
